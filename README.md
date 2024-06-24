@@ -43,12 +43,12 @@ To set up a CI/CD pipeline using Jenkins for a Maven project that will be compil
 
 **Job 1: Code Compilation**
 
-1. Create a new freestyle project in Jenkins.
+1. Create a new freestyle project in Jenkins named compile.
 2. Configure Source Code Management:
 - Choose Git.
 - Provide the Repository URL and credentials if required.
 3. Build Triggers:
-- Choose Poll SCM and set the schedule to ```0 1 * * *``` (nightly build at 1AM everyday).
+- Choose Poll SCM and set the schedule to ```H 1 * * *``` (nightly build at 1AM everyday).
 4. Build Environment:
 - Ensure Delete workspace before build starts is checked to avoid stale files.
 5. Build:
@@ -60,7 +60,7 @@ To set up a CI/CD pipeline using Jenkins for a Maven project that will be compil
 
 **Job 2: Testing**
 
-1. Create a new freestyle project in Jenkins named test-job.
+1. Create a new freestyle project in Jenkins named test.
 2. Configure Source Code Management:
 - Choose Git.
 - Provide the Repository URL and credentials if required.
@@ -84,10 +84,12 @@ To set up a CI/CD pipeline using Jenkins for a Maven project that will be compil
 - Provide the Repository URL and credentials if required.
 3. Build Triggers:
 - Choose Build after other projects are built.
-- Specify ``test-job``` and set trigger to Stable.
+- Specify ``test``` and set trigger to Stable.
 4. Build:
 - Add a build step: Invoke top-level Maven targets.
-- Set the Goals to package.
+- Set the Goals to ```package```.
+- Install ```Publish Over SSH``` plugin and configure this plugin in jenkins system configuration.
+- Copy the tomcat server public key to authorized_keys and copy the tomcat server private_key to jenkins system configuration.
 - Add another build step: Send files or execute commands over SSH.
 - Configure the SSH server (AWS EC2 instance) and set the commands to deploy the WAR file to Tomcat. Example commands:
 ```
