@@ -36,19 +36,20 @@ To set up a CI/CD pipeline using Jenkins for a Maven project that will be compil
 7. Push the project to your Git repository.
 
 **Step 2: Setup Jenkins**
+
 **Job 1: Code Compilation**
 
-1. Create a new freestyle project in Jenkins named compile-job.
+1. Create a new freestyle project in Jenkins named ```compile-job```.
 2. Configure Source Code Management:
 - Choose Git.
 - Provide the Repository URL and credentials if required.
 3. Build Triggers:
-- Choose Poll SCM and set the schedule to H H * * * (nightly build).
+- Choose Poll SCM and set the schedule to ```H H * * *``` (nightly build).
 4. Build Environment:
 - Ensure Delete workspace before build starts is checked to avoid stale files.
 5. Build:
 - Add a build step: Invoke top-level Maven targets.
-- Set the Goals to clean compile.
+- Set the Goals to ```clean compile```.
 6. Post-build Actions:
 - Add Build other projects.
 - Specify the next job (test-job).
@@ -71,17 +72,32 @@ To set up a CI/CD pipeline using Jenkins for a Maven project that will be compil
 - Add Build other projects.
 - Specify the next job (deploy-job).
 
-Job 3: Deployment
-Create a new freestyle project in Jenkins named deploy-job.
-Configure Source Code Management:
-Choose Git.
-Provide the Repository URL and credentials if required.
-Build Triggers:
-Choose Build after other projects are built.
-Specify test-job and set trigger to Stable.
-Build:
-Add a build step: Invoke top-level Maven targets.
-Set the Goals to package.
-Add another build step: Send files or execute commands over SSH.
-Configure the SSH server (AWS EC2 instance) and set the commands to deploy the WAR file to Tomcat. Example commands:
- 
+**Job 3: Deployment**
+
+1. Create a new freestyle project in Jenkins named deploy-job.
+2. Configure Source Code Management:
+- Choose Git.
+- Provide the Repository URL and credentials if required.
+3. Build Triggers:
+- Choose Build after other projects are built.
+- Specify ``test-job``` and set trigger to Stable.
+4. Build:
+- Add a build step: Invoke top-level Maven targets.
+- Set the Goals to package.
+- Add another build step: Send files or execute commands over SSH.
+- Configure the SSH server (AWS EC2 instance) and set the commands to deploy the WAR file to Tomcat. Example commands:
+```
+scp target/*.war user@ec2-instance:/path/to/tomcat/webapps/
+ssh user@ec2-instance 'bash -s' <<'ENDSSH'
+cd /path/to/tomcat/bin
+./shutdown.sh
+./startup.sh
+ENDSSH
+```
+5. Post-build Actions:
+
+Add Editable Email Notification:
+- Set recipient email.
+- Configure triggers for build success and failure.
+
+**Tomcat Server Configuration** : ```https://github.com/Pavithra-42/jenkins_tomcat_demo.git```
