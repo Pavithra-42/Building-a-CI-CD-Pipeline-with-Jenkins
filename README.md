@@ -38,6 +38,7 @@ To set up a CI/CD pipeline using Jenkins for a Maven project that will be compil
 5. Click on Generate to download the project zip file.
 6. Extract the project and initialize a Git repository in it.
 7. Push the project to your Git repository.
+**NOTE**: Use this https://github.com/Pavithra-42/simple-java-maven-app.git as target/sure-fire in test job is expecting file structure.
 
 **Step 2: Setup Jenkins**
 
