@@ -60,10 +60,10 @@
     </build>
     
     <scm>
-        <connection>scm:git:git@github.com:username/repository.git</connection>
-        <developerConnection>scm:git:git@github.com:username/repository.git</developerConnection>
+        <connection>scm:git:git@github.com:Pavithra-42/Building-a-CI-CD-Pipeline-with-Jenkins.git</connection>
+        <developerConnection>scmgit@github.com:Pavithra-42/Building-a-CI-CD-Pipeline-with-Jenkins.git</developerConnection>
         <tag>HEAD</tag>
-        <url>https://github.com/username/repository</url>
+        <url>https://github.com/Pavithra-42/Building-a-CI-CD-Pipeline-with-Jenkins.git</url>
     </scm>
     
 </project>
