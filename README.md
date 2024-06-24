@@ -43,12 +43,12 @@ To set up a CI/CD pipeline using Jenkins for a Maven project that will be compil
 
 **Job 1: Code Compilation**
 
-1. Create a new freestyle project in Jenkins named ```compile-job```.
+1. Create a new freestyle project in Jenkins.
 2. Configure Source Code Management:
 - Choose Git.
 - Provide the Repository URL and credentials if required.
 3. Build Triggers:
-- Choose Poll SCM and set the schedule to ```H H * * *``` (nightly build).
+- Choose Poll SCM and set the schedule to ```0 1 * * *``` (nightly build at 1AM everyday).
 4. Build Environment:
 - Ensure Delete workspace before build starts is checked to avoid stale files.
 5. Build:
