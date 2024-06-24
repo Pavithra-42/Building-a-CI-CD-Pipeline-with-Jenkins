@@ -24,7 +24,11 @@ You’re a DevOps engineer at Pied Piper, a software company that provides web a
 - The Tomcat server should allow remote deployment.
 - The pipeline should consist of three freestyle jobs for compilation, test, and deployment respectively.
 
+
+
 To set up a CI/CD pipeline using Jenkins for a Maven project that will be compiled, tested, and deployed to a Tomcat server, you need to follow these steps:
+
+**Tomcat Server Configuration** : ```https://github.com/Pavithra-42/jenkins_tomcat_demo.git```
 
 **Step 1: Create a Maven Project**
 1. Go to Spring Initializr.
@@ -100,4 +104,3 @@ Add Editable Email Notification:
 - Set recipient email.
 - Configure triggers for build success and failure.
 
-**Tomcat Server Configuration** : ```https://github.com/Pavithra-42/jenkins_tomcat_demo.git```
